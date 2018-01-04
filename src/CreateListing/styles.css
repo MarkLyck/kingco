@@ -1,0 +1,15 @@
+.create-listing-form {
+    display: flex;
+    flex-direction: column;
+    padding: 64px;
+    .row {
+        display: flex;
+        justify-content: space-between;
+        .field, .FormControl {
+            width: calc(50% - 16px);
+        }
+    }
+    .field {
+        margin-bottom: 24px;
+    }
+}

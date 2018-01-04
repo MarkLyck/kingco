@@ -1,9 +1,14 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { graphql} from 'react-apollo'
-import Modal from 'react-modal'
+import { withStyles } from 'material-ui/styles';
 import gql from 'graphql-tag'
 import Browse from '../Browse'
+import { Button, TextField } from 'material-ui';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Radio, { RadioGroup } from 'material-ui/Radio';
+import { FormControl, FormHelperText, FormControlLabel, FormLabel } from 'material-ui/Form';
+import './styles.css'
 
 class CreateListing extends React.Component {
 
@@ -11,51 +16,87 @@ class CreateListing extends React.Component {
     type: 'rental',
     title: '',
     description: '',
-  }
-
-  componentDidMount() {
-      Modal.setAppElement(Browse);
+    address: '',
+    bedrooms: '',
+    bathrooms: '',
   }
 
   render() {
     return (
-      <Modal
-        isOpen
-        contentLabel='Create Listing'
-        onRequestClose={this.props.history.goBack}
-      >
-        <div className=''>
-          <div className=''>
-            {/* {this.state.imageUrl &&
-              <img
-                src={this.state.imageUrl}
-                alt=''
-                className=''
-              />} */}
-            <input
-              className=''
-              value={this.state.imageUrl}
-              placeholder='Title'
-              onChange={e => this.setState({ title: e.target.value })}
-              autoFocus
+    <div className=''>
+        <form className='create-listing-form' noValidate autoComplete="off">
+            <TextField
+                className='field'
+                value={this.state.imageUrl}
+                label='Title'
+                onChange={e => this.setState({ title: e.target.value })}
+                autoFocus
             />
-            <input
-              className=''
-              value={this.state.description}
-              placeholder='Description'
-              onChange={e => this.setState({ description: e.target.value })}
+            <FormControl component="fieldset" required className="fieldset">
+                <FormLabel component="legend">Listing type</FormLabel>
+                <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    className="radiogroup"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                >
+                    <FormControlLabel value="Rental" control={<Radio />} label="Rental" />
+                    <FormControlLabel value="Sale" control={<Radio />} label="Sale" />
+                </RadioGroup>
+            </FormControl>
+            <div className="row">
+                <TextField
+                    className='field'
+                    value={this.state.imageUrl}
+                    label='Bedrooms'
+                    type="number"
+                    onChange={e => this.setState({ bedrooms: e.target.value })}
+                />
+                <TextField
+                    className='field'
+                    value={this.state.imageUrl}
+                    label='Bathrooms'
+                    type="number"
+                    onChange={e => this.setState({ bathrooms: e.target.value })}
+                />
+            </div>
+            <div className="row">
+            <FormControl fullWidth className="field">
+                <InputLabel htmlFor="deposit">Deposit</InputLabel>
+                <Input
+                id="adornment-deposit"
+                value={this.state.deposit}
+                onChange={e => this.setState({ deposit: e.target.value })}
+                startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                />
+            </FormControl>
+            <FormControl fullWidth className="field">
+                <InputLabel htmlFor="price">Price</InputLabel>
+                <Input
+                id="adornment-price"
+                value={this.state.price}
+                onChange={e => this.setState({ price: e.target.value })}
+                startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                />
+            </FormControl>
+            </div>
+            <TextField
+                className='field'
+                value={this.state.description}
+                label='Description'
+                multiline
+                onChange={e => this.setState({ description: e.target.value })}
             />
-            {this.state.description &&
-              this.state.title &&
-              <button
-                className=''
-                onClick={this.handlePost}
-              >
-                Post
-              </button>}
-          </div>
-        </div>
-      </Modal>
+            <TextField
+                className='field'
+                value={this.state.description}
+                label='Address'
+                onChange={e => this.setState({ address: e.target.value })}
+            />
+            <Button className='' onClick={this.handlePost}>Create listing</Button>
+        </form>
+    </div>
     )
   }
 
