@@ -5,9 +5,10 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import Browse from './Browse'
-import CreateListing from './CreateListing'
-import Listing from './Listing'
+import Home from './pages/Home'
+import Browse from './pages/Browse'
+import CreateListing from './pages/CreateListing'
+import Listing from './components/Listing'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker';
 
@@ -23,9 +24,11 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>
       <div>
-        <Route exact path='/' component={Browse} />
-        <Route path='/listings' component={Browse} />
-        <Route path='/listings/:id' component={Listing} />
+        <Route exact path='/' component={Home} />
+        <Route path='/rentals' component={Browse} />
+        <Route path='/rentals/:id' component={Listing} />
+        <Route path='/sales' component={Browse} />
+        <Route path='/sales/:id' component={Listing} />
         <Route path='/create' component={CreateListing} />
       </div>
     </Router>

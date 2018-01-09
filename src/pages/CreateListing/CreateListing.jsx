@@ -1,14 +1,13 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { graphql} from 'react-apollo'
-import { withStyles } from 'material-ui/styles';
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import Browse from '../Browse'
+import Dropzone from 'react-dropzone'
 import { Button, TextField } from 'material-ui';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Radio, { RadioGroup } from 'material-ui/Radio';
-import { FormControl, FormHelperText, FormControlLabel, FormLabel } from 'material-ui/Form';
+import Card from 'material-ui/Card';
+import { FormControl } from 'material-ui/Form';
 import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
 import './styles.css'
 
@@ -27,6 +26,8 @@ class CreateListing extends React.Component {
     listingMenuOpen: false,
     countryAnchorEl: null,
     countryMenuOpen: false,
+
+    files: [],
   }
 
   handleListingMenuClick = event => {
@@ -44,15 +45,80 @@ class CreateListing extends React.Component {
       this.setState({ countryMenuOpen: false, country });
   }
 
+  onDrop(files) {
+    const stateFiles = this.state.files
+    files.forEach(file => stateFiles.push(file))
+    console.log(stateFiles)
+    this.setState({ files: stateFiles });
+  }
+
+  uploadImage = file => new Promise((resolve) => {
+        const data = new FormData()
+        data.append('data', file)
+
+        fetch('https://api.graph.cool/file/v1/cjc0iaohu3tct0145nnqqb7vw', {
+            method: 'POST',
+            body: data,
+        })
+            .then(response => response.json())
+            .then((imageFile) => {
+                resolve(imageFile.url)
+            })
+    })
+
+    postListing = async (imageUrls) => {
+        const {
+            type,
+            country,
+            title,
+            description,
+            bedrooms,
+            bathrooms,
+            address,
+            deposit,
+            price,
+        } = this.state
+
+        await this.props.createListingMutation({ variables: {
+            type,
+            country,
+            title,
+            description,
+            bedrooms,
+            bathrooms,
+            address,
+            deposit,
+            price,
+            images: imageUrls,
+        }})
+        this.props.history.replace('/')
+    }
+
+    handlePost = () => {
+        const { files } = this.state
+        let imagesUploaded = 0
+        let imageUrls = []
+        files.forEach(file => {
+            this.uploadImage(file)
+                .then(url => {
+                    imagesUploaded++
+                    imageUrls.push(url)
+                    if (imagesUploaded === files.length) {
+                        this.postListing(imageUrls)
+                    }
+                })
+        })
+    }
+
   render() {
     const {
         listingAnchorEl,
         listingMenuOpen,
-        handleListingMenuClose,
 
         countryAnchorEl,
         countryMenuOpen,
-        handleCountryMenuClose,
+
+        files,
 
         title,
         description,
@@ -61,12 +127,23 @@ class CreateListing extends React.Component {
         bedrooms,
         bathrooms,
         address,
-        deposit,
-        price,
     } = this.state
+
     return (
         <div className=''>
             <form className='create-listing-form' noValidate autoComplete="off">
+                <Dropzone onDrop={this.onDrop.bind(this)} className="dropzone" accept="image/jpeg, image/png">
+                    {!files.length && <p>Upload images</p>}
+                    {files.length ? (
+                        <ul className="img-preview-list">
+                            {files.map((file) => (
+                                <Card className="image-card" key={file.lastModified}>
+                                    <img className='image-preview' src={file.preview} alt="property" />
+                                </Card>)
+                            )}
+                        </ul>
+                    ) : ''}
+                </Dropzone>
                 <TextField
                     className='field'
                     label='Title'
@@ -146,7 +223,6 @@ class CreateListing extends React.Component {
                         <InputLabel htmlFor="deposit">Deposit</InputLabel>
                         <Input
                             id="adornment-deposit"
-                            // value={this.state.deposit}
                             onChange={e => this.setState({ deposit: Number(e.target.value) })}
                             startAdornment={<InputAdornment position="start">{ country === 'Gibraltar' ? '£' : '€' }</InputAdornment>}
                         />
@@ -155,7 +231,6 @@ class CreateListing extends React.Component {
                         <InputLabel htmlFor="price">{type === 'rental' ? 'Price per month' : 'Price'}</InputLabel>
                         <Input
                             id="adornment-price"
-                            // value={this.state.price}
                             onChange={e => this.setState({ price: Number(e.target.value) })}
                             startAdornment={<InputAdornment position="start">{ country === 'Gibraltar' ? '£' : '€' }</InputAdornment>}
                         />
@@ -179,33 +254,6 @@ class CreateListing extends React.Component {
         </div>
     )
   }
-
-  handlePost = async () => {
-    const {
-        type,
-        country,
-        title,
-        description,
-        bedrooms,
-        bathrooms,
-        address,
-        deposit,
-        price,
-    } = this.state
-    await this.props.createListingMutation({ variables: {
-        type,
-        country,
-        title,
-        description,
-        bedrooms,
-        bathrooms,
-        address,
-        deposit,
-        price,
-    }})
-    // this.props.history.replace('/')
-  }
-
 }
 
 const CREATE_LISTING_MUTATION = gql`
@@ -219,6 +267,7 @@ const CREATE_LISTING_MUTATION = gql`
       $address: String,
       $deposit: Float!,
       $price: Float!,
+      $images: [String!],
   ) {
     createListing(
         type: $type,
@@ -230,6 +279,7 @@ const CREATE_LISTING_MUTATION = gql`
         address: $address,
         deposit: $deposit,
         price: $price
+        images: $images
     ) {
       id
       type
@@ -240,6 +290,7 @@ const CREATE_LISTING_MUTATION = gql`
       address
       deposit
       price
+      images
     }
   }
 `

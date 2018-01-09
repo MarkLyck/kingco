@@ -1,0 +1,13 @@
+.browse {
+    width: 100%;
+}
+
+.listings {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 32px;
+    width: 80%;
+}
