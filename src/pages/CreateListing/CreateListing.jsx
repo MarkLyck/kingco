@@ -3,12 +3,24 @@ import { withRouter } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Dropzone from 'react-dropzone'
-import { Button, TextField } from 'material-ui';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Card from 'material-ui/Card';
-import { FormControl } from 'material-ui/Form';
-import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
+import { Button, TextField } from 'material-ui'
+import List, {
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+} from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
+import Menu, { MenuItem } from 'material-ui/Menu'
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
+import { FormControlLabel, FormGroup } from 'material-ui/Form';
+import Checkbox from 'material-ui/Checkbox';
+import Card from 'material-ui/Card'
+import { FormControl } from 'material-ui/Form'
+import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown'
+import Delete from 'material-ui-icons/Delete'
+import Add from 'material-ui-icons/Add'
+import { gibraltarAreaList, spainAreaList } from '../../common/areaLists'
+// import AreaSelector from './AreaSelector'
 import './styles.css'
 
 class CreateListing extends React.Component {
@@ -16,11 +28,21 @@ class CreateListing extends React.Component {
   state = {
     type: 'rental',
     country: 'Gibraltar',
+    area: 'Select area',
     title: '',
     description: '',
-    address: '',
+    refNumber: '',
+    // address: '',
     bedrooms: '',
     bathrooms: '',
+    sqmInterior: '',
+    sqmTerrace: '',
+    feature: '',
+    features: [],
+
+    parkingAvailable : false,
+    poolAvailable : false,
+    cat2Available : false,
 
     listingAnchorEl: null,
     listingMenuOpen: false,
@@ -30,25 +52,34 @@ class CreateListing extends React.Component {
     files: [],
   }
 
-  handleListingMenuClick = event => {
-    this.setState({ listingMenuOpen: true, listingAnchorEl: event.currentTarget });
-  };
+  handleListingMenuClick = event => this.setState({ listingMenuOpen: true, listingAnchorEl: event.currentTarget })
+  setListingType = (type) => this.setState({ listingMenuOpen: false, type })
 
-  setListingType = (type) => {
-      this.setState({ listingMenuOpen: false, type });
+  handleCountryMenuClick = event => this.setState({ countryMenuOpen: true, countryAnchorEl: event.currentTarget })
+  setCountry = (country) => this.setState({ countryMenuOpen: false, country })
+
+  handleAreaMenuClick = event => this.setState({ areaMenuOpen: true, areaAnchorEl: event.currentTarget })
+  setArea = (area) => this.setState({ areaMenuOpen: false, area })
+
+  setParking = () => this.setState({ parkingAvailable: !this.state.parkingAvailable })
+  setPool = () => this.setState({ poolAvailable: !this.state.poolAvailable })
+  setCat2 = () => this.setState({ cat2Available: !this.state.cat2Available })
+
+  addFeature = () => {
+      const stateFeatures = this.state.features
+      stateFeatures.push(this.state.feature)
+      this.setState({ features: stateFeatures, feature: '' })
   }
-  handleCountryMenuClick = event => {
-    this.setState({ countryMenuOpen: true, countryAnchorEl: event.currentTarget });
-  };
 
-  setCountry = (country) => {
-      this.setState({ countryMenuOpen: false, country });
+  removeFeature = index => {
+      const stateFeatures = this.state.features
+      stateFeatures.splice(index, 1)
+      this.setState({ features: stateFeatures })
   }
 
   onDrop(files) {
     const stateFiles = this.state.files
     files.forEach(file => stateFiles.push(file))
-    console.log(stateFiles)
     this.setState({ files: stateFiles });
   }
 
@@ -74,8 +105,7 @@ class CreateListing extends React.Component {
             description,
             bedrooms,
             bathrooms,
-            address,
-            deposit,
+            // address,
             price,
         } = this.state
 
@@ -86,8 +116,7 @@ class CreateListing extends React.Component {
             description,
             bedrooms,
             bathrooms,
-            address,
-            deposit,
+            // address,
             price,
             images: imageUrls,
         }})
@@ -118,16 +147,27 @@ class CreateListing extends React.Component {
         countryAnchorEl,
         countryMenuOpen,
 
+        areaAnchorEl,
+        areaMenuOpen,
+
         files,
 
-        title,
+        // title,
         description,
+        refNumber,
         type,
         country,
+        area,
         bedrooms,
         bathrooms,
-        address,
+        sqmInterior,
+        sqmTerrace,
+        feature,
+        features,
+        // address,
     } = this.state
+
+    const areaList = country === 'Gibraltar' ? gibraltarAreaList : spainAreaList
 
     return (
         <div className=''>
@@ -144,13 +184,15 @@ class CreateListing extends React.Component {
                         </ul>
                     ) : ''}
                 </Dropzone>
-                <TextField
-                    className='field'
-                    label='Title'
-                    value={title}
-                    onChange={e => this.setState({ title: e.target.value })}
-                    autoFocus
-                />
+                {/* <div className="row fullwidth">
+                    <TextField
+                        className='field'
+                        label='Title'
+                        value={title}
+                        onChange={e => this.setState({ title: e.target.value })}
+                        autoFocus
+                    />
+                </div> */}
                 <div className="row">
                     <div className="menu-container">
                         <h4>Listing type</h4>
@@ -203,30 +245,76 @@ class CreateListing extends React.Component {
 
                 </div>
                 <div className="row">
-                    <TextField
-                        className='field'
-                        value={bedrooms}
-                        label='Bedrooms'
-                        type="number"
-                        onChange={e => this.setState({ bedrooms: Number(e.target.value) })}
-                    />
-                    <TextField
-                        className='field'
-                        value={bathrooms}
-                        label='Bathrooms'
-                        type="number"
-                        onChange={e => this.setState({ bathrooms: Number(e.target.value) })}
-                    />
+                    <div className="menu-container">
+                        <h4>Area</h4>
+                        <div>
+                            <Button
+                                aria-owns={areaMenuOpen ? 'area-menu' : null}
+                                aria-haspopup="true"
+                                onClick={this.handleAreaMenuClick}
+                                raised
+                                color="primary"
+                            >
+                                {area}
+                                <KeyboardArrowDown className="rightIcon" />
+                            </Button>
+                            <Menu
+                                id="area-menu"
+                                anchorEl={areaAnchorEl}
+                                open={areaMenuOpen}
+                                onClose={this.handleAreaMenuClose}
+                            >
+                                {areaList.map(area => (
+                                    <MenuItem onClick={() => this.setArea(area.label)}>{area.label}</MenuItem>
+                                ))}
+                            </Menu>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                    <FormGroup row className="checkbox-group">
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={this.state.parkingAvailable}
+                                    onChange={this.setParking}
+                                    value="parking"
+                                />
+                            }
+                            label="Parking"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={this.state.poolAvailable}
+                                    onChange={this.setPool}
+                                    value="pool"
+                                />
+                            }
+                            label="Pool"
+                        />
+                        <FormControlLabel
+                            disabled={country === 'Spain'}
+                            control={
+                                <Checkbox
+                                    checked={this.state.cat2Available}
+                                    onChange={this.setCat2}
+                                    value="Cat 2"
+                                />
+                            }
+                            label="Cat 2"
+                        />
+                    </FormGroup>
                 </div>
                 <div className="row">
-                    <FormControl fullWidth className="field">
-                        <InputLabel htmlFor="deposit">Deposit</InputLabel>
-                        <Input
-                            id="adornment-deposit"
-                            onChange={e => this.setState({ deposit: Number(e.target.value) })}
-                            startAdornment={<InputAdornment position="start">{ country === 'Gibraltar' ? '£' : '€' }</InputAdornment>}
-                        />
-                    </FormControl>
+                    <TextField
+                        className='field'
+                        value={refNumber !== 0 ? refNumber : ''}
+                        label='Reference Number'
+                        type="number"
+                        onChange={e => this.setState({ refNumber: Number(e.target.value) })}
+                    />
                     <FormControl fullWidth className="field">
                         <InputLabel htmlFor="price">{type === 'rental' ? 'Price per month' : 'Price'}</InputLabel>
                         <Input
@@ -236,19 +324,81 @@ class CreateListing extends React.Component {
                         />
                     </FormControl>
                 </div>
-                <TextField
-                    className='field'
-                    value={description}
-                    label='Description'
-                    multiline
-                    onChange={e => this.setState({ description: e.target.value })}
-                />
-                <TextField
+                <div className="row">
+                    <TextField
+                        className='field'
+                        value={bedrooms !== 0 ? bedrooms : ''}
+                        label='Bedrooms'
+                        type="number"
+                        onChange={e => this.setState({ bedrooms: Number(e.target.value) })}
+                    />
+                    <TextField
+                        className='field'
+                        value={bathrooms !== 0 ? bathrooms : ''}
+                        label='Bathrooms'
+                        type="number"
+                        onChange={e => this.setState({ bathrooms: Number(e.target.value) })}
+                    />
+                </div>
+                <div className="row">
+                    <TextField
+                        className='field'
+                        value={sqmInterior !== 0 ? sqmInterior : ''}
+                        label='sqm Interior'
+                        type="number"
+                        onChange={e => this.setState({ sqmInterior: Number(e.target.value) })}
+                    />
+                    <TextField
+                        className='field'
+                        value={sqmTerrace !== 0 ? sqmTerrace : ''}
+                        label='sqm Terrace'
+                        type="number"
+                        onChange={e => this.setState({ sqmTerrace: Number(e.target.value) })}
+                    />
+                </div>
+                <div className="row fullwidth">
+                    <TextField
+                        className='field'
+                        value={description}
+                        label='Description'
+                        multiline
+                        onChange={e => this.setState({ description: e.target.value })}
+                    />
+                </div>
+                <div className="row fullwidth">
+                    <TextField
+                        className='field'
+                        value={feature}
+                        label='Add feature'
+                        multiline
+                        onChange={e => this.setState({ feature: e.target.value })}
+                    />
+                    <IconButton raised color="primary" onClick={this.addFeature}>
+                        <Add className="rightIcon" />
+                    </IconButton>
+                </div>
+                <div className="row fullwidth feature-container">
+                    {features.length ? <h4>Features</h4> : ''}
+                    <List dense>
+                        {features.map((feature, index) => (
+                            <ListItem button key={feature}>
+                                <ListItemText primary={feature} />
+                                <ListItemSecondaryAction>
+                                    <IconButton aria-label="Delete" onClick={() => this.removeFeature(index)}>
+                                        <Delete />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        ))}
+                    </List>
+                </div>
+
+                {/* <TextField
                     className='field'
                     value={address}
                     label='Address'
                     onChange={e => this.setState({ address: e.target.value })}
-                />
+                /> */}
                 <Button className='' raised color="primary" onClick={this.handlePost}>Create listing</Button>
             </form>
         </div>
@@ -264,7 +414,6 @@ const CREATE_LISTING_MUTATION = gql`
       $description: String!,
       $bedrooms: Int!,
       $bathrooms: Int!,
-      $address: String,
       $deposit: Float!,
       $price: Float!,
       $images: [String!],
@@ -276,7 +425,6 @@ const CREATE_LISTING_MUTATION = gql`
         description: $description,
         bedrooms: $bedrooms,
         bathrooms: $bathrooms,
-        address: $address,
         deposit: $deposit,
         price: $price
         images: $images
@@ -287,7 +435,6 @@ const CREATE_LISTING_MUTATION = gql`
       description
       bedrooms
       bathrooms
-      address
       deposit
       price
       images
