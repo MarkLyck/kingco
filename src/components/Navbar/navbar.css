@@ -1,0 +1,55 @@
+@import '../../_variables.css';
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 32px 118px;
+    box-sizing: border-box;
+    margin-top: 18px;
+    .menu {
+        display: flex;
+        .menu-item {
+            display: flex;
+            justify-content: center;
+            margin: 0 14px;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            a {
+                padding: 16px;
+                width: 104px;
+                display: flex;
+                justify-content: center;
+                text-transform: uppercase;
+                text-decoration: none;
+                font-weight: 800;
+                letter-spacing: 2px;
+            }
+            transition: all 0.2s;
+            &:hover {
+                cursor: pointer;
+                border: 2px solid color($text-color shade(20%));
+                a { color: color($text-color shade(20%)); }
+            }
+        }
+        .rentals {
+            background: $primary;
+            border: 2px solid $primary;
+            a { color: #fff; }
+            &:hover {
+                background: color($primary shade(20%));
+                border: 2px solid color($primary shade(20%));
+                a { color: #fff; }
+            }
+        }
+        .sales {
+            border: 2px solid $primary;
+            a { color: $primary; }
+            &:hover {
+                background: color($primary shade(20%));
+                border: 2px solid color($primary shade(20%));
+                a { color: #fff; }
+            }
+        }
+    }
+}

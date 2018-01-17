@@ -36,14 +36,16 @@ const ListingsQuery = gql`
   query {
       allListings {
         id
+        reference
         type
+        area
         bathrooms
         bedrooms
         description
         images
         price
-        title
         type
+        features
       },
   }
 `

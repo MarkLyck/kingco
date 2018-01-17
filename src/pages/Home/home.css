@@ -1,5 +1,66 @@
+@import '../../_variables.css';
+
 .home {
     display: flex;
     flex-direction: column;
     align-items: center;
+    .hero {
+        margin-top: 100px;
+        height: 650px;
+        width: 100%;
+        background-image: url('./home.svg');
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: contain;
+        .animation-container {
+            height: 400px;
+            width: 100%;
+            background-image: url('./animation.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .title {
+                font-size: 58px;
+                color: $text-secondary-color;
+                font-family: 'Raleway', roboto, sans-serif;
+                font-weight: 600;
+                margin-bottom: 16px;
+            }
+            .subtitle {
+                font-size: 32px;
+                margin-bottom: 80px;
+            }
+        }
+    }
+    .company {
+        margin-top: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .sec-subtitle {
+            font-size: 26px;
+            font-weight: 700;
+        }
+        .divider {
+            background: $secondary;
+            height: 8px;
+            width: 36px;
+            border-radius: 4px;
+            margin: 24px 0;
+        }
+        .sec-title {
+            font-size: 56px;
+            font-weight: 700;
+            color: $text-secondary-color;
+        }
+        .section-text {
+            margin: 40px 0;
+            line-height: 30px;
+        }
+    }
 }

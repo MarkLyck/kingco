@@ -29,7 +29,6 @@ class CreateListing extends React.Component {
     type: 'rental',
     country: 'Gibraltar',
     area: 'Select area',
-    title: '',
     description: '',
     refNumber: '',
     // address: '',
@@ -101,23 +100,35 @@ class CreateListing extends React.Component {
         const {
             type,
             country,
-            title,
+            refNumber,
+            area,
+            parkingAvailable,
+            poolAvailable,
+            cat2Available,
             description,
             bedrooms,
             bathrooms,
-            // address,
+            sqmInterior,
+            sqmTerrace,
+            features,
             price,
         } = this.state
 
         await this.props.createListingMutation({ variables: {
             type,
             country,
-            title,
+            area,
+            parking: parkingAvailable,
+            pool: poolAvailable,
+            cat2: cat2Available,
             description,
             bedrooms,
             bathrooms,
-            // address,
+            sqmInterior,
+            sqmTerrace,
+            features,
             price,
+            reference: refNumber,
             images: imageUrls,
         }})
         this.props.history.replace('/')
@@ -152,7 +163,6 @@ class CreateListing extends React.Component {
 
         files,
 
-        // title,
         description,
         refNumber,
         type,
@@ -184,15 +194,6 @@ class CreateListing extends React.Component {
                         </ul>
                     ) : ''}
                 </Dropzone>
-                {/* <div className="row fullwidth">
-                    <TextField
-                        className='field'
-                        label='Title'
-                        value={title}
-                        onChange={e => this.setState({ title: e.target.value })}
-                        autoFocus
-                    />
-                </div> */}
                 <div className="row">
                     <div className="menu-container">
                         <h4>Listing type</h4>
@@ -373,7 +374,7 @@ class CreateListing extends React.Component {
                         multiline
                         onChange={e => this.setState({ feature: e.target.value })}
                     />
-                    <IconButton raised color="primary" onClick={this.addFeature}>
+                    <IconButton raised="true" color="primary" onClick={this.addFeature}>
                         <Add className="rightIcon" />
                     </IconButton>
                 </div>
@@ -381,7 +382,7 @@ class CreateListing extends React.Component {
                     {features.length ? <h4>Features</h4> : ''}
                     <List dense>
                         {features.map((feature, index) => (
-                            <ListItem button key={feature}>
+                            <ListItem button key={feature+index}>
                                 <ListItemText primary={feature} />
                                 <ListItemSecondaryAction>
                                     <IconButton aria-label="Delete" onClick={() => this.removeFeature(index)}>
@@ -408,36 +409,52 @@ class CreateListing extends React.Component {
 
 const CREATE_LISTING_MUTATION = gql`
   mutation createListingMutation(
+      $reference: Int!,
       $type: String!,
       $country: String!,
-      $title: String!,
+      $area: String!,
       $description: String!,
       $bedrooms: Int!,
       $bathrooms: Int!,
-      $deposit: Float!,
+      $sqmInterior: Int!,
+      $sqmTerrace: Int!,
       $price: Float!,
       $images: [String!],
+      $parking: Boolean,
+      $pool: Boolean,
+      $cat2: Boolean,
+      $features: [String!],
   ) {
     createListing(
+        reference: $reference,
         type: $type,
         country: $country,
-        title: $title,
+        area: $area,
         description: $description,
+        sqmInterior: $sqmInterior,
+        sqmTerrace: $sqmTerrace,
         bedrooms: $bedrooms,
         bathrooms: $bathrooms,
-        deposit: $deposit,
-        price: $price
-        images: $images
+        price: $price,
+        images: $images,
+        parking: $parking,
+        pool: $pool,
+        cat2: $cat2,
+        features: $features
     ) {
       id
+      reference
       type
-      title
-      description
+      country
+      area
       bedrooms
       bathrooms
-      deposit
       price
       images
+      parking
+      pool
+      cat2
+      features
     }
   }
 `

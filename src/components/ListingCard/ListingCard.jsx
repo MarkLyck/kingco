@@ -19,10 +19,16 @@ const ListingCard = ({ listing }) => {
             </div>
             <div className="card-content">
                 <div className="listing-header">
-                    <h2 className="listing-title">{listing.title}</h2>
+                    <h2 className="listing-title">{listing.area}</h2>
                     <h2 className="listing-price">{currencyCode}{price} {listing.type === 'rental' && 'pcm'}</h2>
                 </div>
-                <h3 className="beds-baths">{listing.bedrooms} Beds | {listing.bathrooms} Baths</h3>
+                <div className="stats">
+                    <h3 className="reference">Ref: {listing.reference}</h3>
+                    <h3 className="beds-baths">{listing.bedrooms} Beds | {listing.bathrooms} Baths</h3>
+                </div>
+                <ul className="features">
+                    {listing.features.map(feature => <li key={feature} className="feature">{feature}</li>)}
+                </ul>
                 <Button className="details-button" raised color="primary">View details</Button>
             </div>
         </Card>
