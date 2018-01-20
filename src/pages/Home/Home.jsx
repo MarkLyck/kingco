@@ -22,9 +22,9 @@ const Home = ({ allListings }) => {
             </div>
 
             <section className="company">
-                <h4 className="sec-subtitle">A different kind of agent</h4>
+                <h4 className="sec-subtitle">Not your traditional agent</h4>
                 <div className="divider" />
-                <h2 className="sec-title">King's Real Estate</h2>
+                <h2 className="sec-title">Kings Real Estate</h2>
                 <p className="section-text">
                     We at {companyName} believe moving doesn’t have to be stressful, you just need to have the right team
                     behind you. Our office will work with you to understand exactly what’s important to you as you make your
