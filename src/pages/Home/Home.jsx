@@ -3,8 +3,8 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Navbar from '../../components/Navbar'
 import Filter from '../../components/Filter'
+import Footer from '../../components/Footer'
 import { companyName } from '../../common/variables'
-// import Svg from './svg'
 import './home.css'
 
 const Home = ({ allListings }) => {
@@ -24,7 +24,7 @@ const Home = ({ allListings }) => {
             <section className="company">
                 <h4 className="sec-subtitle">Not your traditional agent</h4>
                 <div className="divider" />
-                <h2 className="sec-title">Kings Real Estate</h2>
+                <h2 className="sec-title">King's Real Estate</h2>
                 <p className="section-text">
                     We at {companyName} believe moving doesn’t have to be stressful, you just need to have the right team
                     behind you. Our office will work with you to understand exactly what’s important to you as you make your
@@ -41,6 +41,7 @@ const Home = ({ allListings }) => {
                     difference!
                 </p>
             </section>
+            <Footer />
         </div>
     )
 }

@@ -3,6 +3,8 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import AdvancedFilter from '../../components/AdvancedFilter'
 import ListingCard from '../../components/ListingCard'
+import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer'
 import './browse.css'
 
 class Browse extends Component {
@@ -23,10 +25,12 @@ class Browse extends Component {
 
         return (
             <div className="browse">
+                <Navbar />
                 <AdvancedFilter setFilter={this.setFilter} filter={filter} />
                 <ul className="listings">
                     {listings.map(listing => <ListingCard key={listing.id} listing={listing} />)}
                 </ul>
+                <Footer />
             </div>
         )
     }

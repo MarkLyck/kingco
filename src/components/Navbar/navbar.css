@@ -7,8 +7,14 @@
     padding: 32px 118px;
     box-sizing: border-box;
     margin-top: 18px;
+    .logo-container {
+        .navbar-logo {
+            height: 100px;
+        }
+    }
     .menu {
         display: flex;
+        height: 48px;
         .menu-item {
             display: flex;
             justify-content: center;

@@ -43,6 +43,8 @@ class Filter extends Component {
             priceMax,
         } = this.state
 
+        const currencySymbol ='£' //: '€'
+
         return (
             <div className="filter">
                 <div className="menu-container">
@@ -121,7 +123,7 @@ class Filter extends Component {
                         >
                             <div className="filter-button-content">
                                 <h4>Price range</h4>
-                                <h3>{priceMin} - {priceMax}</h3>
+                                <h3>{currencySymbol}{priceMin} - {currencySymbol}{priceMax}</h3>
                             </div>
                             <KeyboardArrowDown className="rightIcon" />
                         </button>

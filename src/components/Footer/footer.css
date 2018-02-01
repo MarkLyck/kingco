@@ -1,0 +1,14 @@
+@import '../../_variables.css';
+
+.footer {
+    background: $dark;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 118px;
+    box-sizing: border-box;
+    .logo {
+        height: 80px;
+    }
+}
