@@ -5,12 +5,15 @@ import Menu, { MenuItem } from 'material-ui/Menu'
 import List, { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown'
+import KeyboardArrowUp from 'material-ui-icons/KeyboardArrowUp'
+import ClickOutside from 'react-click-outside'
 import { gibraltarAreaList, spainAreaList } from '../../common/areaLists'
 import './filter.css'
 
 class Filter extends Component {
     state = {
         area: 'any',
+        country: 'Any',
         areaAnchorEl: null,
         areaMenuOpen: false,
 
@@ -18,39 +21,48 @@ class Filter extends Component {
         typeAnchorEl: null,
         typeMenuOpen: false,
 
-        priceMin: 0,
-        priceMax: 5000,
-
         showPriceRange: false,
-        priceRange: { min: 0, max: 5000 },
+        priceRange: { min: 0, max: 10000 },
+        maxRange: 10000,
+        step: 100,
     }
 
     handleAreaMenuClick = event => this.setState({ areaAnchorEl: event.currentTarget, areaMenuOpen: !this.state.areaMenuOpen })
     handleAreaMenuClose = event => this.setState({ areaAnchorEl: null, areaMenuOpen: false })
-    handleAreaSelect = area => this.setState({ area, areaAnchorEl: null, areaMenuOpen: false })
+    handleAreaSelect = (area, country) => this.setState({ area, country, areaAnchorEl: null, areaMenuOpen: false })
 
     handleTypeMenuClick = event => this.setState({ typeAnchorEl: event.currentTarget, typeMenuOpen: !this.state.typeMenuOpen })
     handleTypeMenuClose = event => this.setState({ typeAnchorEl: null, typeMenuOpen: false })
-    handleTypeSelect = type => this.setState({ type, typeAnchorEl: null, typeMenuOpen: false })
+    handleTypeSelect = type => this.setState({
+        type,
+        typeAnchorEl: null,
+        typeMenuOpen: false,
+        priceRange: { min: 0, max: type === 'rent' ? 10000 : 1000000 },
+        maxRange: type === 'rent' ? 10000 : 10000000,
+        step: type === 'rent' ? 100 : 25000,
+    })
 
     togglePriceRange = () => this.setState({ showPriceRange: !this.state.showPriceRange })
 
     renderPriceRange = () => (
-        <InputRange
-            // className="price-range"
-            maxValue={5000}
-            minValue={0}
-            step={100}
-            allowSameValues={false}
-            onChange={value => this.setState({ priceRange: value })}
-            formatLabel={value => `€${value}`}
-            value={this.state.priceRange}
-        />
+        <ClickOutside onClickOutside={this.togglePriceRange}>
+            <InputRange
+                className="price-range"
+                maxValue={this.state.maxRange}
+                minValue={0}
+                step={this.state.step}
+                allowSameValues={false}
+                onChange={value => this.setState({ priceRange: value })}
+                formatLabel={value => `€${value.toLocaleString()}`}
+                value={this.state.priceRange}
+            />
+        </ClickOutside>
     )
 
     render() {
         const {
             area,
+            country,
             areaAnchorEl,
             areaMenuOpen,
 
@@ -58,13 +70,11 @@ class Filter extends Component {
             typeAnchorEl,
             typeMenuOpen,
 
-            priceMin,
-            priceMax,
-
+            priceRange,
             showPriceRange,
         } = this.state
 
-        const currencySymbol ='£' //: '€'
+        const currencySymbol = (country === 'Gibraltar' || country === 'Any') ? '£' : '€'
 
         return (
             <div className="filter">
@@ -121,13 +131,13 @@ class Filter extends Component {
                             onClose={this.handleAreaMenuClose}
                         >
                             <List className="filter-area-list">
-                                <ListItem onClick={() => this.handleAreaSelect('Any')}>Any</ListItem>
-                                <ListItem onClick={() => this.handleAreaSelect('Gibraltar')}>Gibraltar</ListItem>
-                                <ListItem onClick={() => this.handleAreaSelect('Spain')}>Spain</ListItem>
+                                <ListItem onClick={() => this.handleAreaSelect('Any', 'Any')}>Any</ListItem>
+                                <ListItem onClick={() => this.handleAreaSelect('Gibraltar', 'Gibraltar')}>Gibraltar</ListItem>
+                                <ListItem onClick={() => this.handleAreaSelect('Spain', 'Spain')}>Spain</ListItem>
                                 <Divider light />
-                                {gibraltarAreaList.map(area => <ListItem onClick={() => this.handleAreaSelect(area.label)}>{area.label}</ListItem>)}
+                                {gibraltarAreaList.map(area => <ListItem onClick={() => this.handleAreaSelect(area.label, 'Gibraltar')}>{area.label}</ListItem>)}
                                 <Divider light />
-                                {spainAreaList.map(area => <ListItem onClick={() => this.handleAreaSelect(area.label)}>{area.label}</ListItem>)}
+                                {spainAreaList.map(area => <ListItem onClick={() => this.handleAreaSelect(area.label, 'Spain')}>{area.label}</ListItem>)}
                             </List>
                         </Menu>
                     </div>
@@ -145,9 +155,9 @@ class Filter extends Component {
                         >
                             <div className="filter-button-content">
                                 <h4>Price range</h4>
-                                <h3>{currencySymbol}{priceMin} - {currencySymbol}{priceMax}</h3>
+                                <h3>{currencySymbol}{priceRange.min.toLocaleString()} - {currencySymbol}{priceRange.max.toLocaleString()}</h3>
                             </div>
-                            <KeyboardArrowDown className="rightIcon" />
+                            {showPriceRange ? <KeyboardArrowUp className="rightIcon"/> : <KeyboardArrowDown className="rightIcon"/>}
                         </button>
                     </div>
                 </div>
