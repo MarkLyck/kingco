@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-// import { Button } from 'material-ui';
+import InputRange from 'react-input-range'
+import 'react-input-range/lib/css/index.css'
 import Menu, { MenuItem } from 'material-ui/Menu'
 import List, { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -19,6 +20,9 @@ class Filter extends Component {
 
         priceMin: 0,
         priceMax: 5000,
+
+        showPriceRange: false,
+        priceRange: { min: 0, max: 5000 },
     }
 
     handleAreaMenuClick = event => this.setState({ areaAnchorEl: event.currentTarget, areaMenuOpen: !this.state.areaMenuOpen })
@@ -28,6 +32,21 @@ class Filter extends Component {
     handleTypeMenuClick = event => this.setState({ typeAnchorEl: event.currentTarget, typeMenuOpen: !this.state.typeMenuOpen })
     handleTypeMenuClose = event => this.setState({ typeAnchorEl: null, typeMenuOpen: false })
     handleTypeSelect = type => this.setState({ type, typeAnchorEl: null, typeMenuOpen: false })
+
+    togglePriceRange = () => this.setState({ showPriceRange: !this.state.showPriceRange })
+
+    renderPriceRange = () => (
+        <InputRange
+            // className="price-range"
+            maxValue={5000}
+            minValue={0}
+            step={100}
+            allowSameValues={false}
+            onChange={value => this.setState({ priceRange: value })}
+            formatLabel={value => `€${value}`}
+            value={this.state.priceRange}
+        />
+    )
 
     render() {
         const {
@@ -41,6 +60,8 @@ class Filter extends Component {
 
             priceMin,
             priceMax,
+
+            showPriceRange,
         } = this.state
 
         const currencySymbol ='£' //: '€'
@@ -113,10 +134,11 @@ class Filter extends Component {
                 </div>
                 <div className="filter-divider" />
                 <div className="menu-container">
-                    <div>
+                    <div className="range-container">
+                        {showPriceRange && this.renderPriceRange()}
                         <button
                             aria-haspopup="true"
-                            onClick={this.handlePriceRangeClick}
+                            onClick={this.togglePriceRange}
                             raised
                             color="primary"
                             className="filter-dropdown-button"
