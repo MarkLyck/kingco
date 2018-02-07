@@ -1,16 +1,15 @@
+@import '../../_variables.css';
+
 .listing-card {
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 32px;
     display: flex;
-    border-radius: 8px !important;
     .image-preview {
         height: 200px;
         width: 320px;
         background-repeat: no-repeat;
         background-size: cover;
-        border-bottom-left-radius: 8px;
-        border-top-left-radius: 8px;
         position: relative;
         overflow: hidden;
         .all-photos {
@@ -20,7 +19,7 @@
             align-items: center;
             bottom: 0;
             right: 16px;
-            background: rgba(92, 159, 201, 0.8);
+            background: rgba(0, 0, 0, 0.5);
             border: none;
             width: 54px;
             padding: 8px;
@@ -31,7 +30,7 @@
             &:hover {
                 cursor: pointer;
                 transform: translateY(0);
-                background: rgba(92, 159, 201, 1);
+                background: rgba(0, 0, 0, 1);
             }
             svg {
                 color: #fff;
@@ -82,7 +81,7 @@
                     width: 8px;
                     height: 8px;
                     border-radius: 50%;
-                    background: rgba(92, 159, 201, 1);
+                    background: $primary;
                 }
                 margin-top: 8px;
             }
