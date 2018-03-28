@@ -1,8 +1,8 @@
 import React from 'react'
-import Card from 'material-ui/Card';
-import PhotoCamera from 'material-ui-icons/PhotoCamera';
-import { Button } from 'material-ui';
-import './listingCard.css'
+import Card from 'material-ui/Card'
+import PhotoCamera from 'material-ui-icons/PhotoCamera'
+import { Button } from 'material-ui'
+import './listingDetails.css'
 
 const ListingCard = ({ listing }) => {
     const currencyCode = listing.country === 'Gibraltar' ? '£' : '€'

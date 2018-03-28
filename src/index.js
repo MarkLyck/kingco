@@ -8,7 +8,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import Home from './pages/Home'
 import Browse from './pages/Browse'
 import CreateListing from './pages/CreateListing'
-import ListingCard from './components/ListingCard'
+import ListingDetails from './components/ListingDetails'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker';
 
@@ -23,12 +23,12 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>
-      <div>
+      <div className="router">
         <Route exact path='/' component={Home} />
         <Route path='/rentals' component={Browse} />
-        <Route path='/rentals/:id' component={ListingCard} />
+        <Route path='/rentals/:id' component={ListingDetails} />
         <Route path='/sales' component={Browse} />
-        <Route path='/sales/:id' component={ListingCard} />
+        <Route path='/sales/:id' component={ListingDetails} />
         <Route path='/create' component={CreateListing} />
       </div>
     </Router>
