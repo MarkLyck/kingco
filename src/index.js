@@ -26,9 +26,9 @@ ReactDOM.render(
       <div className="router">
         <Route exact path='/' component={Home} />
         <Route path='/rentals' component={Browse} />
-        <Route path='/rentals/:id' component={ListingDetails} />
+        <Route path='/rentals/:ref' component={ListingDetails} />
         <Route path='/sales' component={Browse} />
-        <Route path='/sales/:id' component={ListingDetails} />
+        <Route path='/sales/:ref' component={ListingDetails} />
         <Route path='/create' component={CreateListing} />
       </div>
     </Router>

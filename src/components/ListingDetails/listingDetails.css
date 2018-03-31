@@ -1,1 +1,52 @@
 @import '../../_variables.css';
+
+.listing-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .listing-details-container {
+        width: 90%;
+        // height: 90%;
+        max-width: 800px;
+
+        .image-preview {
+            height: 400px;
+            width:  100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: black;
+        }
+        .slick-dots {
+            bottom: 0;
+            .slick-active {
+                button::before {
+                    opacity: 1;
+                }
+            }
+            button::before {
+                color: #fff;
+                opacity: 0.40;
+                font-size: 10px;
+            }
+        }
+
+        .details-content {
+            padding: 46px;
+
+            .listing-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+                .listing-title {
+                    color: $dark;
+                    font-size: 1.5rem;
+                }
+            }
+            .reference {
+                margin-bottom: 32px;
+            }
+        }
+    }
+}
