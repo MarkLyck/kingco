@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
@@ -22,7 +22,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Router>
+    <BrowserRouter>
       <div className="router">
         <Route exact path='/' component={Home} />
         <Route path='/rentals' component={Browse} />
@@ -31,7 +31,7 @@ ReactDOM.render(
         <Route path='/sales/:ref' component={ListingDetails} />
         <Route path='/create' component={CreateListing} />
       </div>
-    </Router>
+    </BrowserRouter>
   </ApolloProvider>,
   document.getElementById('root'),
 )

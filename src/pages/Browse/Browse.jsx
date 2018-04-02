@@ -16,8 +16,13 @@ class Browse extends Component {
         this.setState({ filter })
     }
 
+    componentWillReceiveProps(newProps) {
+        console.log('newProps', newProps);
+        console.log('oldProps', this.props);
+    }
+
     render() {
-        const { location, allListings = [] } = this.props
+        const { location, allListings = [], history } = this.props
         const { filter } = this.state
 
         const type = location.pathname.indexOf('rentals') > 0 ? 'rental' : 'sale'
@@ -26,9 +31,9 @@ class Browse extends Component {
         return (
             <div className="browse">
                 <Navbar />
-                <AdvancedFilter setFilter={this.setFilter} filter={filter} />
+                {/* <AdvancedFilter setFilter={this.setFilter} filter={filter} /> */}
                 <ul className="listings">
-                    {listings.map(listing => <ListingCard key={listing.id} listing={listing} />)}
+                    {listings.map(listing => <ListingCard key={listing.id} listing={listing} history={history} />)}
                 </ul>
                 <Footer />
             </div>
@@ -41,6 +46,7 @@ const ListingsQuery = gql`
       allListings {
         id
         reference
+        country
         type
         area
         bathrooms

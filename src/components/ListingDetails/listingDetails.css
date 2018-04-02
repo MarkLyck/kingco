@@ -9,13 +9,17 @@
         width: 90%;
         // height: 90%;
         max-width: 800px;
+        max-height: calc(100% - 64px);
+        overflow-y: auto;
+        overflow-x: hidden;
 
         .image-preview {
             height: 400px;
             width:  100%;
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: contain;
             background-color: black;
+            background-position: center;
         }
         .slick-dots {
             bottom: 0;
@@ -32,7 +36,8 @@
         }
 
         .details-content {
-            padding: 46px;
+            padding: 32px;
+            padding-bottom: 24px;
 
             .listing-header {
                 display: flex;
@@ -46,6 +51,79 @@
             }
             .reference {
                 margin-bottom: 32px;
+            }
+
+            .description {
+                margin: 24px 0;
+                color: $dark;
+                line-height: 20px;
+            }
+
+            .features {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                .feature {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+
+                    &:before {
+                        display: block;
+                        position: relative;
+                        margin-right: 8px;
+                        content: "";
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: $primary;
+                    }
+                    margin-top: 8px;
+                    margin-right: 16px;
+                }
+            }
+            .button-container {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                .close-button {
+                    border: 2px solid $primary;
+                    background: none;
+                    color: $primary;
+                    &:hover {
+                        background: color($primary shade(20%));
+                        border: 2px solid color($primary shade(20%));
+                        color: #fff;
+                    }
+                }
+            }
+            .contact-button, .close-button, .delete-button {
+                border: none;
+                background: $primary;
+                color: #fff;
+                border-radius: 4px;
+                padding: 16px 64px;
+                box-sizing: border-box;
+                text-transform: uppercase;
+                font-weight: 700;
+                outline: none;
+                transition: all 0.2s;
+                text-decoration: none;
+                &:hover {
+                    cursor: pointer;
+                    background: color($primary shade(20%));
+                }
+            }
+            .contact-button {
+                font-size: 14px;
+            }
+            .delete-button {
+                background: $error-color;
+                &:hover {
+                    cursor: pointer;
+                    background: color($error-color shade(20%));
+                }
             }
         }
     }

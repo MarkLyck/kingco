@@ -1,12 +1,14 @@
 @import '../../_variables.css';
 
 .footer {
+    box-sizing: border-box;
+    padding-bottom: 64px;
+    display: flex;
+    justify-content: center;
     background: $dark;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 32px 118px;
+    padding-bottom: 64px;
     box-sizing: border-box;
     .logo {
         height: 80px;

@@ -90,6 +90,21 @@
             position: absolute;
             bottom: 24px;
             right: 24px;
+            border: none;
+            background: $primary;
+            color: #fff;
+            border-radius: 4px;
+            padding: 16px 64px;
+            box-sizing: border-box;
+            text-transform: uppercase;
+            font-weight: 700;
+            outline: none;
+            transition: all 0.2s;
+            text-decoration: none;
+            &:hover {
+                cursor: pointer;
+                background: color($primary shade(20%));
+            }
         }
     }
 }
