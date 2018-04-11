@@ -48,6 +48,10 @@
                     color: $dark;
                     font-size: 1.5rem;
                 }
+                .listing-price {
+                    color: $dark;
+                    font-size: 1.5rem;
+                }
             }
             .reference {
                 margin-bottom: 32px;

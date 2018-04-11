@@ -59,6 +59,27 @@ class Filter extends Component {
         </ClickOutside>
     )
 
+    search = () => {
+        const {
+            area,
+            country,
+            type,
+            priceRange,
+        } = this.state
+
+        console.log('area', area)
+        console.log('country', country)
+        console.log('type', type)
+        console.log('priceRange', priceRange)
+
+        if (type === 'rent') {
+            this.props.history.push(`/rentals?country=${country}&area=${area}&min=${priceRange.min}&max=${priceRange.max}`)
+        } else {
+            this.props.history.push(`/sales?country=${country}&area=${area}&min=${priceRange.min}&max=${priceRange.max}`)
+        }
+        
+    }
+
     render() {
         const {
             area,
@@ -161,7 +182,7 @@ class Filter extends Component {
                         </button>
                     </div>
                 </div>
-                <button className="search-button">Search</button>
+                <button className="search-button" onClick={this.search}>Search</button>
             </div>
         )
     }

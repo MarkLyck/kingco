@@ -29,8 +29,6 @@ class ListingCard extends React.Component {
         const currencyCode = listing.country === 'Gibraltar' ? '£' : '€'
         const price = listing.price.toLocaleString()
 
-        console.log(listing)
-        console.log(this.state.showingDetails)
         return (
             <Card className="listing-card">
                 {this.state.showingDetails ? <ListingDetails browseListing={listing} close={this.closeModal} /> : ''}

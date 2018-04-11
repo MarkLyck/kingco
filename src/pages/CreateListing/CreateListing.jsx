@@ -51,6 +51,10 @@ class CreateListing extends React.Component {
     files: [],
   }
 
+  componentDidMount() {
+      localStorage.setItem('skAdmin', true)
+  }
+
   handleListingMenuClick = event => this.setState({ listingMenuOpen: true, listingAnchorEl: event.currentTarget })
   setListingType = (type) => this.setState({ listingMenuOpen: false, type })
 

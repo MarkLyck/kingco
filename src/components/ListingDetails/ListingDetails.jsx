@@ -93,7 +93,7 @@ class ListingDetails extends React.Component {
                         </ul>
                         <p className="description">{listing.description}</p>
                         <div className="button-container">
-                            <a href="mailto:stephanie@sk-estates.com" className="contact-button">Contact us</a>
+                            <a href={`mailto:stephanie@sk-estates.com?Subject=${listing.area}%20ref%20${listing.reference}`} className="contact-button">Contact us</a>
                             <button onClick={this.handleClose} className="close-button">Keep looking</button>
                             {this.renderDeleteButton(listing.id)}
                         </div>

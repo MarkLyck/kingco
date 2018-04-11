@@ -7,8 +7,8 @@ import Footer from '../../components/Footer'
 import { companyName } from '../../common/variables'
 import './home.css'
 
-const Home = ({ allListings }) => {
-    console.log(allListings)
+const Home = ({ history }) => {
+    console.log(history)
     return (
         <div className="home">
             <Navbar />
@@ -16,7 +16,7 @@ const Home = ({ allListings }) => {
                 <div className="content">
                     <h1 className="title">Find it, Love it, Live there.</h1>
                     <h3 className="subtitle">Find the home of your dreams</h3>
-                    <Filter />
+                    <Filter history={history} />
                 </div>
                 <div className="animation-container" />
             </div>
