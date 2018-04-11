@@ -8,11 +8,14 @@
         margin-top: 100px;
         height: 650px;
         width: 100%;
-        background-image: url('./home.svg');
-        /*background-image: url('./Gib.jpg');*/
-        background-position: bottom;
+        /* background-image: url('./home.svg'); */
+        background-image: url('./background.jpeg');
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
+        /*background-image: url('./Gib.jpg');*/
+        /* background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: contain; */
         .animation-container {
             height: 400px;
             width: 100%;
