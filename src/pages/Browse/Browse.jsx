@@ -53,9 +53,6 @@ class Browse extends Component {
             })
         }
 
-        console.log(filter)
-        console.log(listings)
-
         return (
             <div className="browse">
                 <Navbar />

@@ -15,7 +15,7 @@ const Home = ({ history }) => {
             <div className="hero">
                 <div className="content">
                     <h1 className="title">Find it, Love it, Live there.</h1>
-                    <h3 className="subtitle">Find the home of your dreams</h3>
+                    <h3 className="subtitle">What are you looking for?</h3>
                     <Filter history={history} />
                 </div>
                 <div className="animation-container" />

@@ -1,6 +1,7 @@
 @import '../../_variables.css';
 
 .navbar {
+    position: absolute;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -22,6 +23,7 @@
             border: 2px solid transparent;
             border-radius: 4px;
             a {
+                position: relative;
                 padding: 16px;
                 width: 104px;
                 display: flex;
@@ -30,12 +32,19 @@
                 text-decoration: none;
                 font-weight: 800;
                 letter-spacing: 2px;
+                color: $primary;
+                .rightIcon {
+                    position: absolute;
+                    top: calc(50% + 2px);
+                    right: 16px;
+                    transform: translateY(-50%);
+                }
             }
             transition: all 0.2s;
             &:hover {
                 cursor: pointer;
-                border: 2px solid color($text-color shade(20%));
-                a { color: color($text-color shade(20%)); }
+                border: 2px solid color($primary shade(20%));
+                a { color: color($primary shade(20%)); }
             }
         }
         .rentals {
