@@ -46,30 +46,4 @@
             }
         }
     }
-    .company {
-        margin-top: 80px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .sec-subtitle {
-            font-size: 26px;
-            font-weight: 700;
-        }
-        .divider {
-            background: $secondary;
-            height: 8px;
-            width: 36px;
-            border-radius: 4px;
-            margin: 24px 0;
-        }
-        .sec-title {
-            font-size: 56px;
-            font-weight: 700;
-            color: $text-secondary-color;
-        }
-        .section-text {
-            margin: 40px 0;
-            line-height: 30px;
-        }
-    }
 }

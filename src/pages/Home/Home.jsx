@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Navbar from '../../components/Navbar'
 import Filter from '../../components/Filter'
+import Section from '../../components/Section'
 import Footer from '../../components/Footer'
 import { companyName } from '../../common/variables'
 import './home.css'
@@ -21,10 +22,7 @@ const Home = ({ history }) => {
                 <div className="animation-container" />
             </div>
 
-            <section className="company">
-                <h4 className="sec-subtitle">Not your traditional agent</h4>
-                <div className="divider" />
-                <h2 className="sec-title">{companyName}</h2>
+            <Section title={companyName} subtitle="Not your traditional agent">
                 <p className="section-text">
                     We at {companyName} believe moving doesn’t have to be stressful, you just need to have the right team
                     behind you. Our office will work with you to understand exactly what’s important to you as you make your
@@ -40,7 +38,7 @@ const Home = ({ history }) => {
                     Beautiful properties. Bespoke services. Excellent results. {companyName}- An estate agent with a
                     difference!
                 </p>
-            </section>
+            </Section>
             <Footer />
         </div>
     )

@@ -7,20 +7,24 @@ import Logo from '../../media/logo.svg'
 
 class Navbar extends React.Component {
     state = {
-        anchorEl: null,
+        gibAnchorEl: null,
+        aboutAnchorEl: null,
     }
 
-    handleMenuOpen = event => {
+    handleGibMenuOpen = event => {
         event.preventDefault()
-        this.setState({ anchorEl: event.currentTarget })
+        this.setState({ gibAnchorEl: event.currentTarget })
     }
-
-    handleMenuClose = () => {
-        this.setState({ anchorEl: null })
+    handleGibMenuClose = () => this.setState({ gibAnchorEl: null })
+    
+    handleAboutMenuOpen = event => {
+        event.preventDefault()
+        this.setState({ aboutAnchorEl: event.currentTarget })
     }
+    handleAboutMenuClose = () => this.setState({ aboutAnchorEl: null })
 
     render() {
-        const { anchorEl } = this.state;
+        const { gibAnchorEl, aboutAnchorEl } = this.state;
 
         return (
             <header className="navbar">
@@ -32,21 +36,39 @@ class Navbar extends React.Component {
                     <li className="menu-item sales"><Link to="/sales">Sales</Link></li>
                     <li className="menu-item rentals"><Link to="/rentals">Rentals</Link></li>
                     <li className="menu-item">
-                        <a href="" onClick={this.handleMenuOpen} aria-haspopup="true" aria-owns={anchorEl ? 'simple-menu' : null}>
-                            More
-                            <KeyboardArrowDown className="rightIcon" />
+                        <a href="" className="withIcon" onClick={this.handleAboutMenuOpen} aria-haspopup="true" aria-owns={aboutAnchorEl ? 'about-menu' : null}>
+                            About <KeyboardArrowDown className="rightIcon" />
+                        </a>
+                    </li>
+                    <li className="menu-item">
+                        <a href="" className="withIcon" onClick={this.handleGibMenuOpen} aria-haspopup="true" aria-owns={gibAnchorEl ? 'gib-menu' : null}>
+                            Gibraltar <KeyboardArrowDown className="rightIcon" />
                         </a>
                     </li>
                 </ul>
                 <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={this.handleMenuClose}
+                    id="about-menu"
+                    anchorEl={aboutAnchorEl}
+                    open={Boolean(aboutAnchorEl)}
+                    onClose={this.handleAboutMenuClose}
                     >
-                    <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-                    <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-                    <MenuItem onClick={this.handleMenuClose}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleAboutMenuClose}>Services</MenuItem>
+                    <MenuItem onClick={this.handleAboutMenuClose}>Code of Conduct</MenuItem>
+                </Menu>
+                <Menu
+                    id="gib-menu"
+                    anchorEl={gibAnchorEl}
+                    open={Boolean(gibAnchorEl)}
+                    onClose={this.handleGibMenuClose}
+                    >
+                    <MenuItem onClick={this.handleGibMenuClose}>About</MenuItem>
+                    <MenuItem onClick={this.handleGibMenuClose}>Map (Housing)</MenuItem>
+                    <MenuItem onClick={this.handleGibMenuClose}>Relocation</MenuItem>
+                    <MenuItem onClick={this.handleGibMenuClose}>Cat 2 & HEPPS</MenuItem>
+                    <MenuItem onClick={this.handleGibMenuClose}>Residency</MenuItem>
+                    <MenuItem onClick={this.handleGibMenuClose}>Tax</MenuItem>
+                    <MenuItem onClick={this.handleGibMenuClose}>Stamp Duty</MenuItem>
+                    <MenuItem onClick={this.handleGibMenuClose}>Schooling</MenuItem>
                 </Menu>
             </header>
         )

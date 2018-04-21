@@ -25,7 +25,6 @@
             a {
                 position: relative;
                 padding: 16px;
-                width: 104px;
                 display: flex;
                 justify-content: center;
                 text-transform: uppercase;
@@ -36,9 +35,12 @@
                 .rightIcon {
                     position: absolute;
                     top: calc(50% + 2px);
-                    right: 16px;
+                    right: 4px;
                     transform: translateY(-50%);
                 }
+            }
+            .withIcon {
+                padding-right: 32px;
             }
             transition: all 0.2s;
             &:hover {
