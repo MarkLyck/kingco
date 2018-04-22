@@ -27,6 +27,7 @@
     p {
         margin: 40px 0;
         line-height: 30px;
+        align-self: left;
     }
 
     h3 {
@@ -36,9 +37,17 @@
     }
 
     ul {
+        align-self: left;
         list-style-type: circle;
+        margin: 32px 0;
+        padding-left: 32px;
         li {
             margin-bottom: 8px;
         }
+    }
+    .table-container {
+        width: 100%;
+        margin: 32px 0;
+        line-height: 48px;
     }
 }

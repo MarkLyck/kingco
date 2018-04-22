@@ -12,6 +12,14 @@ import ListingDetails from './components/ListingDetails'
 
 import Services from './pages/About/Services'
 import CodeOfConduct from './pages/About/CodeOfConduct'
+
+import AboutGibraltar from './pages/Gibraltar/About'
+import Residency from './pages/Gibraltar/Residency'
+import Cat2AndHepps from './pages/Gibraltar/Cat2AndHepps'
+import Tax from './pages/Gibraltar/Tax'
+import StampDuty from './pages/Gibraltar/StampDuty'
+import Schooling from './pages/Gibraltar/Schooling'
+
 import './index.css'
 import registerServiceWorker from './registerServiceWorker';
 
@@ -36,6 +44,12 @@ ReactDOM.render(
 
         <Route path='/about/services' component={Services} />
         <Route path='/about/code_of_conduct' component={CodeOfConduct} />
+        <Route path='/gibraltar/about' component={AboutGibraltar} />
+        <Route path='/gibraltar/residency' component={Residency} />
+        <Route path='/gibraltar/cat2_hepps' component={Cat2AndHepps} />
+        <Route path='/gibraltar/tax' component={Tax} />
+        <Route path='/gibraltar/stamp_duty' component={StampDuty} />
+        <Route path='/gibraltar/schooling' component={Schooling} />
       </div>
     </BrowserRouter>
   </ApolloProvider>,
