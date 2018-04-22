@@ -9,6 +9,9 @@ import Home from './pages/Home'
 import Browse from './pages/Browse'
 import CreateListing from './pages/CreateListing'
 import ListingDetails from './components/ListingDetails'
+
+import Services from './pages/About/Services'
+import CodeOfConduct from './pages/About/CodeOfConduct'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker';
 
@@ -30,6 +33,9 @@ ReactDOM.render(
         <Route path='/sales' component={Browse} />
         <Route path='/sales/:ref' component={ListingDetails} />
         <Route path='/create' component={CreateListing} />
+
+        <Route path='/about/services' component={Services} />
+        <Route path='/about/code_of_conduct' component={CodeOfConduct} />
       </div>
     </BrowserRouter>
   </ApolloProvider>,

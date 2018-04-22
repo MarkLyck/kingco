@@ -59,3 +59,15 @@ table {
 section {
 	max-width: 1000px;
 }
+
+.text-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+
+    section {
+        padding-top: 180px;
+        flex-grow: 1;
+    }
+}

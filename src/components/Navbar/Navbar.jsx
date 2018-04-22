@@ -11,6 +11,12 @@ class Navbar extends React.Component {
         aboutAnchorEl: null,
     }
 
+    goto = (path) => {
+        this.handleAboutMenuClose()
+        this.handleGibMenuClose()
+        this.props.history.replace(path)
+    }
+
     handleGibMenuOpen = event => {
         event.preventDefault()
         this.setState({ gibAnchorEl: event.currentTarget })
@@ -52,8 +58,8 @@ class Navbar extends React.Component {
                     open={Boolean(aboutAnchorEl)}
                     onClose={this.handleAboutMenuClose}
                     >
-                    <MenuItem onClick={this.handleAboutMenuClose}>Services</MenuItem>
-                    <MenuItem onClick={this.handleAboutMenuClose}>Code of Conduct</MenuItem>
+                    <MenuItem onClick={() => this.goto('/about/services')}>Services</MenuItem>
+                    <MenuItem onClick={() => this.goto('/about/code_of_conduct')}>Code of Conduct</MenuItem>
                 </Menu>
                 <Menu
                     id="gib-menu"
@@ -61,14 +67,13 @@ class Navbar extends React.Component {
                     open={Boolean(gibAnchorEl)}
                     onClose={this.handleGibMenuClose}
                     >
-                    <MenuItem onClick={this.handleGibMenuClose}>About</MenuItem>
-                    <MenuItem onClick={this.handleGibMenuClose}>Map (Housing)</MenuItem>
-                    <MenuItem onClick={this.handleGibMenuClose}>Relocation</MenuItem>
-                    <MenuItem onClick={this.handleGibMenuClose}>Cat 2 & HEPPS</MenuItem>
-                    <MenuItem onClick={this.handleGibMenuClose}>Residency</MenuItem>
-                    <MenuItem onClick={this.handleGibMenuClose}>Tax</MenuItem>
-                    <MenuItem onClick={this.handleGibMenuClose}>Stamp Duty</MenuItem>
-                    <MenuItem onClick={this.handleGibMenuClose}>Schooling</MenuItem>
+                    <MenuItem onClick={() => this.goto('/gibraltar/about')}>About</MenuItem>\
+                    <MenuItem onClick={() => this.goto('/gibraltar/relocation')}>Relocation</MenuItem>
+                    <MenuItem onClick={() => this.goto('/gibraltar/cat2_hepps')}>Cat 2 & HEPPS</MenuItem>
+                    <MenuItem onClick={() => this.goto('/gibraltar/residency')}>Residency</MenuItem>
+                    <MenuItem onClick={() => this.goto('/gibraltar/tax')}>Tax</MenuItem>
+                    <MenuItem onClick={() => this.goto('/gibraltar/stamp_duty')}>Stamp Duty</MenuItem>
+                    <MenuItem onClick={() => this.goto('/gibraltar/schooling')}>Schooling</MenuItem>
                 </Menu>
             </header>
         )

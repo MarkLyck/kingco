@@ -12,7 +12,7 @@ const Home = ({ history }) => {
     console.log(history)
     return (
         <div className="home">
-            <Navbar />
+            <Navbar history={history} />
             <div className="hero">
                 <div className="content">
                     <h1 className="title">Find it, Love it, Live there.</h1>

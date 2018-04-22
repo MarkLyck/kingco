@@ -46,4 +46,8 @@
             }
         }
     }
+
+    section {
+        padding-top: 40px;
+    }
 }
