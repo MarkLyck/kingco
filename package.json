@@ -62,9 +62,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js && cp docs/index.html docs/404.html",
+    "test": "node scripts/test.js --env=jsdom",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "test": "node scripts/test.js --env=jsdom"
+    "deploy": "gh-pages -d build"
   },
   "jest": {
     "collectCoverageFrom": [
