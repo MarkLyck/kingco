@@ -60,7 +60,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && cp docs/index.html docs/404.html",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
