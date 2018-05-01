@@ -20,7 +20,6 @@ import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown'
 import Delete from 'material-ui-icons/Delete'
 import Add from 'material-ui-icons/Add'
 import { gibraltarAreaList, spainAreaList } from '../../common/areaLists'
-// import AreaSelector from './AreaSelector'
 import './styles.css'
 
 class CreateListing extends React.Component {
@@ -31,11 +30,10 @@ class CreateListing extends React.Component {
     area: 'Select area',
     description: '',
     refNumber: '',
-    // address: '',
     bedrooms: '',
     bathrooms: '',
-    sqmInterior: '',
-    sqmTerrace: '',
+    sqmInterior: 0,
+    sqmTerrace: 0,
     feature: '',
     features: [],
 
@@ -112,8 +110,8 @@ class CreateListing extends React.Component {
             description,
             bedrooms,
             bathrooms,
-            sqmInterior,
-            sqmTerrace,
+            sqmInterior = 0,
+            sqmTerrace = 0,
             features,
             price,
         } = this.state
@@ -270,7 +268,7 @@ class CreateListing extends React.Component {
                                 onClose={this.handleAreaMenuClose}
                             >
                                 {areaList.map(area => (
-                                    <MenuItem onClick={() => this.setArea(area.label)}>{area.label}</MenuItem>
+                                    <MenuItem key={area.label} onClick={() => this.setArea(area.label)}>{area.label}</MenuItem>
                                 ))}
                             </Menu>
                         </div>
@@ -398,12 +396,6 @@ class CreateListing extends React.Component {
                     </List>
                 </div>
 
-                {/* <TextField
-                    className='field'
-                    value={address}
-                    label='Address'
-                    onChange={e => this.setState({ address: e.target.value })}
-                /> */}
                 <Button className='' raised color="primary" onClick={this.handlePost}>Create listing</Button>
             </form>
         </div>

@@ -62,7 +62,6 @@ export const gibraltarAreaList = [
     { label: 'Sandpit Mews' },
     { label: 'Shackleton House' },
     { label: 'Sir William Jackson Grove' },
-    { label: 'South District' },
     { label: 'Sunnyside House' },
     { label: 'Sunrise View' },
     { label: 'Sunset Close' },

@@ -36,6 +36,9 @@
         .field, .FormControl {
             width: calc(50% - 16px);
         }
+        button > span {
+            color: #fff !important;
+        }
     }
     .row.fullwidth {
         width: 100%;

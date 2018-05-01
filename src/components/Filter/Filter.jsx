@@ -156,9 +156,9 @@ class Filter extends Component {
                                 <ListItem onClick={() => this.handleAreaSelect('Gibraltar', 'Gibraltar')}>Gibraltar</ListItem>
                                 <ListItem onClick={() => this.handleAreaSelect('Spain', 'Spain')}>Spain</ListItem>
                                 <Divider light />
-                                {gibraltarAreaList.map(area => <ListItem onClick={() => this.handleAreaSelect(area.label, 'Gibraltar')}>{area.label}</ListItem>)}
+                                {gibraltarAreaList.map(area => <ListItem key={area.label} onClick={() => this.handleAreaSelect(area.label, 'Gibraltar')}>{area.label}</ListItem>)}
                                 <Divider light />
-                                {spainAreaList.map(area => <ListItem onClick={() => this.handleAreaSelect(area.label, 'Spain')}>{area.label}</ListItem>)}
+                                {spainAreaList.map(area => <ListItem key={area.label} onClick={() => this.handleAreaSelect(area.label, 'Spain')}>{area.label}</ListItem>)}
                             </List>
                         </Menu>
                     </div>

@@ -1,13 +1,21 @@
 .browse {
     width: 100%;
     height: 100%;
-    display: flex;
+    /* display: flex;
     align-items: center;
+    flex-direction: column; */
+}
+
+.no-listings {
+    height: calc(100% - 180px - 530px);
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    padding-top: 280px;
+    font-size: 2rem;
 }
 
 .listings {
-    height: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;

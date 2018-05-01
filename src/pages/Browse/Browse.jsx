@@ -56,6 +56,7 @@ class Browse extends Component {
         return (
             <div className="browse">
                 <Navbar />
+                {!listings.length ? <h1 className="no-listings">Sorry, There's no listings available</h1> : ''}
                 <ul className="listings">
                     {listings.map(listing => <ListingCard key={listing.id} listing={listing} history={history} />)}
                 </ul>
