@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import whiteLogo from '../../media/logo-white.svg'
 import './footer.css'
 

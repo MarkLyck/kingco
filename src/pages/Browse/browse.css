@@ -22,3 +22,12 @@
     padding-top: 180px;
     width: 80%;
 }
+
+@media (max-width: 1000px) {
+    .listings {
+        flex-wrap: wrap;
+        flex-direction: unset;
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+}

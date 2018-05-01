@@ -59,7 +59,7 @@
                 font-weight: 500;
             }
             .listing-price {
-
+                text-align: right;
             }
         }
         .stats {
@@ -105,6 +105,70 @@
             &:hover {
                 cursor: pointer;
                 background: color($primary shade(20%));
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .listing-card {
+        flex-direction: column;
+        align-self: flex-start;
+        width: calc(50% - 32px);
+        margin: 0 16px 32px;
+        .image-preview {
+            width: 100%;
+            height: 280px;
+        }
+        .card-content {
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: space-between;
+            .stats {
+                margin-bottom: 8px;
+            }
+            .features {
+                margin-top: 16px;
+            }
+            .details-button {
+                width: 100%;
+                position: relative;
+                bottom: 0;
+                right: 0;
+                margin-top: 16px;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .listing-card {
+        width: calc(100% - 32px);
+        .image-preview {
+            height: 380px;
+        }
+    }
+}
+
+@media (max-width: 540px) {
+    .listing-card {
+        width: calc(100% - 32px);
+        .image-preview {
+            height: 280px;
+        }
+    }
+}
+
+
+@media (max-width: 400px) {
+    .listing-card {
+        width: calc(100% - 32px);
+        .image-preview {
+            height: 180px;
+        }
+        .card-content {
+            .details-button {
+                font-size: 8px;
             }
         }
     }

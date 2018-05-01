@@ -9,6 +9,7 @@
     .sec-subtitle {
         font-size: 26px;
         font-weight: 700;
+        text-align: center;
     }
 
     .divider {
@@ -23,6 +24,7 @@
         font-size: 56px;
         font-weight: 700;
         color: $text-secondary-color;
+        text-align: center;
     }
 
     p {
@@ -44,6 +46,7 @@
         padding-left: 32px;
         li {
             margin-bottom: 8px;
+            line-height: 20px;
         }
     }
     .table-container {
