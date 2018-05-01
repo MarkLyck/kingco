@@ -44,7 +44,7 @@ class Filter extends Component {
 
     togglePriceRange = () => this.setState({ showPriceRange: !this.state.showPriceRange })
 
-    renderPriceRange = () => (
+    renderPriceRange = (currencySymbol) => (
         <ClickOutside onClickOutside={this.togglePriceRange}>
             <InputRange
                 className="price-range"
@@ -53,7 +53,7 @@ class Filter extends Component {
                 step={this.state.step}
                 allowSameValues={false}
                 onChange={value => this.setState({ priceRange: value })}
-                formatLabel={value => `€${value.toLocaleString()}`}
+                formatLabel={value => `${currencySymbol}${value.toLocaleString()}`}
                 value={this.state.priceRange}
             />
         </ClickOutside>
@@ -111,7 +111,7 @@ class Filter extends Component {
                         >
                             <div className="filter-button-content">
                                 <h4>I want to...</h4>
-                                <h3>{type}</h3>
+                                <h3 className="capitalize">{type}</h3>
                             </div>
                             <KeyboardArrowDown className="rightIcon" />
                         </button>
@@ -140,8 +140,8 @@ class Filter extends Component {
                             className="filter-dropdown-button"
                         >
                             <div className="filter-button-content">
-                                <h4>Neighbourhood</h4>
-                                <h3>{area}</h3>
+                                <h4>Location</h4>
+                                <h3 className="capitalize">{area}</h3>
                             </div>
                             <KeyboardArrowDown className="rightIcon" />
                         </button>
@@ -166,7 +166,7 @@ class Filter extends Component {
                 <div className="filter-divider" />
                 <div className="menu-container">
                     <div className="range-container">
-                        {showPriceRange && this.renderPriceRange()}
+                        {showPriceRange && this.renderPriceRange(currencySymbol)}
                         <button
                             aria-haspopup="true"
                             onClick={this.togglePriceRange}

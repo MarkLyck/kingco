@@ -35,14 +35,8 @@
                 color: $primary;
                 font-family: 'Raleway', roboto, sans-serif;
                 font-weight: 600;
-                margin-bottom: 16px;
+                margin-bottom: 40px;
                 /* text-shadow: 2px 4px 3px rgba(0,0,0,0.3); */
-            }
-            .subtitle {
-                color: #424242;
-                font-size: 32px;
-                margin-bottom: 80px;
-                text-shadow: 1px 1px 0.5px rgba(0,0,0,0.3);
             }
         }
     }

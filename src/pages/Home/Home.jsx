@@ -15,8 +15,7 @@ const Home = ({ history }) => {
             <Navbar history={history} />
             <div className="hero">
                 <div className="content">
-                    <h1 className="title">Find it, Love it, Live there.</h1>
-                    <h3 className="subtitle">What are you looking for?</h3>
+                    <h1 className="title">What are you looking for?</h1>
                     <Filter history={history} />
                 </div>
                 <div className="animation-container" />
