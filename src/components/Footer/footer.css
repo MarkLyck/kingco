@@ -8,7 +8,7 @@
     width: 100%;
     background: $dark;
     box-sizing: border-box;
-    padding: 32px 118px;
+    padding: 32px;
     .logo {
         height: 80px;
         margin-bottom: 24px;
@@ -20,8 +20,11 @@
             margin: 0 16px;
         }
         .sm-link {
+            display: flex;
+            align-items: center;
             i {
                 color: white;
+                margin-right: 8px;
             }
             text-decoration: none;
             color: white;
@@ -31,20 +34,46 @@
         }
     }
     .details {
-        a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            margin-left: 8px;
+        display: flex;
+        .detail-li {
+            margin-top: 16px;
+            color: rgba(255,255,255,0.65);
+            a {
+                color: rgba(255,255,255,0.8);
+                text-decoration: none;
 
-            &:hover {
-                text-decoration: underline;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            i {
+                color: rgba(255,255,255,0.8);
+                margin: 8px;
             }
         }
-        i {
-            color: rgba(255,255,255,0.8);
-            margin-left: 8px;
+        
+    }
+}
+
+@media (max-width: 760px) {
+    .footer {
+        .details {
+            flex-direction: column;
+            li {
+                margin-top: 4px;
+            }
         }
-        margin-top: 16px;
-        color: rgba(255,255,255,0.65);
+    }
+}
+
+
+@media (max-width: 420px) {
+    .footer {
+        .social-media {
+            flex-direction: column;
+            li {
+                margin-bottom: 16px;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import InputRange from 'react-input-range'
+import { Link } from 'react-router-dom'
 import 'react-input-range/lib/css/index.css'
 import Menu, { MenuItem } from 'material-ui/Menu'
 import List, { ListItem } from 'material-ui/List';
@@ -129,7 +130,7 @@ class Filter extends Component {
                     </div>
                 </div>
                 <div className="filter-divider" />
-                <div className="menu-container">
+                <div className="menu-container location">
                     <div>
                         <button
                             aria-owns={areaMenuOpen ? 'area-menu' : null}
@@ -163,7 +164,7 @@ class Filter extends Component {
                         </Menu>
                     </div>
                 </div>
-                <div className="filter-divider" />
+                <div className="filter-divider location-divider" />
                 <div className="menu-container">
                     <div className="range-container">
                         {showPriceRange && this.renderPriceRange(currencySymbol)}
@@ -183,6 +184,9 @@ class Filter extends Component {
                     </div>
                 </div>
                 <button className="search-button" onClick={this.search}>Search</button>
+
+                <button className="mobile sales-button"><Link to="/sales">Sales</Link></button>
+                <button className="mobile rentals-button"><Link to="/rentals">Rentals</Link></button>
             </div>
         )
     }

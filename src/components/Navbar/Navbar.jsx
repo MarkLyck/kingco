@@ -38,15 +38,16 @@ class Navbar extends React.Component {
                     <Link to="/"><img src={Logo} className="navbar-logo" alt="King's Real Estate" /></Link>
                 </div>
                 <ul className="menu">
-                    <li className="menu-item"><a href={`mailto:stephanie@sk-estates.com`}>Contact</a></li>
+                    <li className="menu-item home"><Link to="/">Home</Link></li>
+                    <li className="menu-item contact"><a href={`mailto:stephanie@sk-estates.com`}>Contact</a></li>
                     <li className="menu-item sales"><Link to="/sales">Sales</Link></li>
                     <li className="menu-item rentals"><Link to="/rentals">Rentals</Link></li>
-                    <li className="menu-item">
+                    <li className="menu-item about">
                         <a href="" className="withIcon" onClick={this.handleAboutMenuOpen} aria-haspopup="true" aria-owns={aboutAnchorEl ? 'about-menu' : null}>
                             About <KeyboardArrowDown className="rightIcon" />
                         </a>
                     </li>
-                    <li className="menu-item">
+                    <li className="menu-item gibraltar">
                         <a href="" className="withIcon" onClick={this.handleGibMenuOpen} aria-haspopup="true" aria-owns={gibAnchorEl ? 'gib-menu' : null}>
                             Gibraltar <KeyboardArrowDown className="rightIcon" />
                         </a>

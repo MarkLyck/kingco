@@ -70,3 +70,65 @@
         }
     }
 }
+
+
+@media (max-width: 1300px) {
+    .navbar {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+
+@media (max-width: 1100px) {
+    .navbar {
+        .menu {
+            .menu-item {
+                a {
+                    font-size: 12px;
+                }
+            }
+            .home {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 880px) {
+    .navbar {
+        .menu {
+            .about {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar {
+        .menu {
+            .gibraltar {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 540px) {
+    .navbar {
+        .menu {
+            .sales, .rentals {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 300px) {
+    .navbar {
+        .menu {
+            display: none;
+        }
+    }
+}

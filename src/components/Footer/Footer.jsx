@@ -22,11 +22,11 @@ const Footer = () => (
                 </a>
             </li>
         </ul>
-        <p className="details">
-            <i className="fas fa-building"></i> 116a (2) Main Street, Gibraltar, GX111AA,
-            <i className="fas fa-phone"></i><a href="tel:+35054062828" >+350 54062828</a>,
-            <i className="fas fa-envelope"></i><a href={`mailto:stephanie@sk-estates.com`}>Stephanie@sk-estates.com</a>
-        </p>
+        <ul className="details">
+            <li className="detail-li"><i className="fas fa-building"></i>116a (2) Main Street, Gibraltar, GX111AA</li>
+            <li className="detail-li"><i className="fas fa-phone"></i><a href="tel:+35054062828" >+350 54062828</a></li>
+            <li className="detail-li"><i className="fas fa-envelope"></i><a href={`mailto:stephanie@sk-estates.com`}>Stephanie@sk-estates.com</a></li>
+        </ul>
     </div>
 )
 

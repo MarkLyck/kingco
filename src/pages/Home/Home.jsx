@@ -18,7 +18,6 @@ const Home = ({ history }) => {
                     <h1 className="title">What are you looking for?</h1>
                     <Filter history={history} />
                 </div>
-                <div className="animation-container" />
             </div>
 
             <Section title={companyName} subtitle="Not your traditional agent">
