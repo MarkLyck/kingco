@@ -52,7 +52,6 @@ const ListingsQuery = gql`
         description
         images
         price
-        title
         type
       },
   }

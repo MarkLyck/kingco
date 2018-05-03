@@ -107,7 +107,7 @@ class ListingDetails extends React.Component {
 const ref = Number(window.location.href.split('/').pop())
 
 const ListingQuery = gql`
-  query ListingQuery($ref: Int) {
+  query ListingQuery($ref: String) {
     allListings(filter: {
         reference: $ref
     }) {

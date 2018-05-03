@@ -315,8 +315,7 @@ class CreateListing extends React.Component {
                         className='field'
                         value={refNumber !== 0 ? refNumber : ''}
                         label='Reference Number'
-                        type="number"
-                        onChange={e => this.setState({ refNumber: Number(e.target.value) })}
+                        onChange={e => this.setState({ refNumber: e.target.value })}
                     />
                     <FormControl fullWidth className="field">
                         <InputLabel htmlFor="price">{type === 'rental' ? 'Price per month' : 'Price'}</InputLabel>
@@ -405,7 +404,7 @@ class CreateListing extends React.Component {
 
 const CREATE_LISTING_MUTATION = gql`
   mutation createListingMutation(
-      $reference: Int!,
+      $reference: String!,
       $type: String!,
       $country: String!,
       $area: String!,
