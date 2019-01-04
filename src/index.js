@@ -24,7 +24,6 @@ import Schooling from './pages/Gibraltar/Schooling'
 import './index.css'
 // import registerServiceWorker from './registerServiceWorker';
 
-// __SIMPLE_API_ENDPOINT__ looks like: 'https://api.graph.cool/simple/v1/__SERVICE_ID__'
 const httpLink = new HttpLink({ uri: 'https://api.graph.cool/simple/v1/cjc0iaohu3tct0145nnqqb7vw' })
 
 const client = new ApolloClient({
