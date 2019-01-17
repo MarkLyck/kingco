@@ -162,7 +162,9 @@ class CreateListing extends React.Component {
     files.forEach(file => {
       this.uploadImage(file).then(url => {
         imagesUploaded++;
+        console.log(file.name, mainImage);
         if (file.name === mainImage) {
+          console.log("setting mainImageUrl to", url);
           mainImageUrl = url;
         } else {
           imageUrls.push(url);
@@ -491,6 +493,7 @@ const CREATE_LISTING_MUTATION = gql`
     $sqmTerrace: Int!
     $price: Float!
     $images: [String!]
+    $mainImage: String
     $parking: Boolean
     $pool: Boolean
     $cat2: Boolean
@@ -508,6 +511,7 @@ const CREATE_LISTING_MUTATION = gql`
       bathrooms: $bathrooms
       price: $price
       images: $images
+      mainImage: $mainImage
       parking: $parking
       pool: $pool
       cat2: $cat2
@@ -522,6 +526,7 @@ const CREATE_LISTING_MUTATION = gql`
       bathrooms
       price
       images
+      mainImage
       parking
       pool
       cat2
