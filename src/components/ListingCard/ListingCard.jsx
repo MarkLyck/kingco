@@ -9,6 +9,13 @@ class ListingCard extends React.Component {
     showingDetails: false
   };
 
+  componentDidMount() {
+    const { listing, history } = this.props;
+    if (history.location.pathname.includes(listing.reference)) {
+      this.setState({ showingDetails: true });
+    }
+  }
+
   showModal = ref => {
     this.setState({ showingDetails: true });
 
